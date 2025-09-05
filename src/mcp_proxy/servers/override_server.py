@@ -153,6 +153,7 @@ class AsyncOverrideServer:
                 override = self.overrides[name]
                 try:
                     result = await override.call_with_original_access(name, arguments, client)
+                    print(result)
                     return result
                 except Exception as e:
                     logger.error(f"Override failed for tool {name}: {e}")
@@ -165,6 +166,7 @@ class AsyncOverrideServer:
             try:
                 logger.info(f"Calling original tool: {name}")
                 result = await client.call_tool(name, arguments)
+                print(result)
                 return result.content
             except Exception as e:
                 logger.error(f"Tool call failed for {name}: {e}")
