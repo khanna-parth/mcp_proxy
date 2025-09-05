@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-proxy"
+version = "0.1.0"
+description = "My MCP Proxy Package"
+authors = [{ name = "Parth Khanna" }]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "fastmcp",
+    "nest-asyncio>=1.6.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
