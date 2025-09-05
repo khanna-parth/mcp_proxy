@@ -9,13 +9,14 @@ A powerful MCP (Model Context Protocol) proxy server that allows you to:
 """
 
 from .servers.override_server import AsyncOverrideServer
-from .models.tool_override import ToolOverride
+from .models.tool_override import ToolOverride, ToolResult
 from .clients.sse_client import MCPClient
 from .tooling.load_tools import load_server_tool
 
 __all__ = [
     "AsyncOverrideServer",
     "ToolOverride", 
+    "ToolResult", 
     "MCPClient",
     "load_server_tool"
 ]
