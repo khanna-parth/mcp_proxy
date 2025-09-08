@@ -8,6 +8,8 @@ class ToolResult(BaseModel):
     text: str
     error: bool
 
+
+# override_fn -> (tool_name, tool_args, mcp_client, kwargs)
 class ToolOverride(BaseModel):
     base_tool: types.Tool
     override_fn: Callable[[str, Dict[str, Any], MCPClient], Awaitable[ToolResult]]
@@ -15,10 +17,11 @@ class ToolOverride(BaseModel):
     async def call_with_original_access(
         self, 
         tool_name: str, 
-        arguments: Dict[str, Any], 
-        original_client: MCPClient
+        arguments: Dict[str, Any],
+        original_client: MCPClient,
+        **kwargs
     ) -> List[types.ContentBlock]:
-        result = await self.override_fn(tool_name, arguments, original_client)
+        result = await self.override_fn(tool_name, arguments, original_client, **kwargs)
         return [types.TextContent(
             type="text", 
             text=f"{'Error: ' if result.error else ''}{result.text}"
